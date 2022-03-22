@@ -17,6 +17,7 @@ float Humidity;             // humidity
 float HeatIndex;            // Heatindex
 int lichtHoeveelheid;
 int LDR_In = A0;
+int kelvin;
  
 //      web server
 #include <ESP8266WiFi.h>
@@ -90,9 +91,10 @@ void handleNotFound(){
 }
 
 void handleSensor(){
+  int kelvin = Temperature - 273;
   server.send(200, "text/html", "<h3>Duurzaam Huis: " 
    +  studentName + "</h3>Temperature " + String(Temperature) + 
-   " Celsius<br>Humidity " + String(Humidity) +  " %<br>Heatindex " + String(HeatIndex) +  " %<br>Lichthoeveelheid " + String(lichtHoeveelheid)); ; 
+   " C*<br>Humidity " + String(Humidity) +  " %<br>Heatindex " + String(HeatIndex) +  " %<br>Lichthoeveelheid " + String(lichtHoeveelheid) + " %<br>Kelvin " + String(kelvin) + "K*"; 
   }
 
 void setup(){
